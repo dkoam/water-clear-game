@@ -1,13 +1,24 @@
 ```html
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>물 정화 타이쿤</title>
 
+    <!-- 예쁜 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
     <style>
+
         * {
             box-sizing: border-box;
             user-select: none;
@@ -15,392 +26,1340 @@
 
         body {
             margin: 0;
-            background: #eef7f8;
-            font-family: Arial, sans-serif;
-            color: #172b35;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #dff8ff,
+                    #edf8fa 45%,
+                    #dceff2
+                );
+
+            color: #17333b;
+
+            font-family:
+                "Poppins",
+                "Noto Sans KR",
+                sans-serif;
         }
 
-        .top {
-            background: white;
+        /* =========================
+           상단
+        ========================= */
+
+        header {
+            background: rgba(255,255,255,0.85);
+
+            backdrop-filter: blur(15px);
+
             padding: 20px;
+
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+
+            border-bottom:
+                1px solid rgba(0,0,0,0.05);
+
+            position: sticky;
+            top: 0;
+
+            z-index: 10;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 700;
+
+            color: #4a7881;
         }
 
         .money {
-            font-size: 30px;
-            font-weight: bold;
+            margin-top: 4px;
+
+            font-size: 32px;
+            font-weight: 800;
+
+            letter-spacing: -1px;
+
+            color: #17333b;
         }
 
-        .main {
-            max-width: 900px;
+
+        /* =========================
+           메인
+        ========================= */
+
+        .container {
+
+            width: 100%;
+            max-width: 1000px;
+
             margin: auto;
-            padding: 30px 20px;
+
+            padding: 30px 20px 60px;
+        }
+
+
+        /* =========================
+           상태
+        ========================= */
+
+        .status {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 20px;
+        }
+
+        .status-box {
+
+            background: rgba(255,255,255,0.8);
+
+            padding: 10px 15px;
+
+            border-radius: 14px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.05);
+        }
+
+
+        /* =========================
+           물
+        ========================= */
+
+        .water-area {
+
             text-align: center;
+
+            margin-top: 10px;
         }
 
-        .stage {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
+        .water {
 
-        .water-box {
             width: 300px;
             height: 300px;
-            margin: 25px auto;
+
+            margin: auto;
+
             border-radius: 50%;
+
             display: flex;
+
             justify-content: center;
             align-items: center;
+
             cursor: pointer;
 
-            font-size: 80px;
+            font-size: 100px;
 
-            background: #654321;
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #8a775a,
+                    #4f422e
+                );
+
             box-shadow:
-                0 15px 30px rgba(0,0,0,0.2),
-                inset 0 0 30px rgba(0,0,0,0.2);
+                0 20px 40px rgba(0,0,0,0.18),
+                inset 0 -15px 30px rgba(0,0,0,0.15);
 
-            transition: 0.1s;
+            transition:
+                transform 0.08s,
+                filter 0.2s;
         }
 
-        .water-box:active {
-            transform: scale(0.93);
+        .water:hover {
+
+            filter: brightness(1.05);
+
+        }
+
+        .water:active {
+
+            transform: scale(0.91);
+
         }
 
         .water-name {
-            font-size: 24px;
-            font-weight: bold;
+
+            margin-top: 20px;
+
+            font-size: 25px;
+
+            font-weight: 800;
+
         }
 
-        .income {
-            margin-top: 8px;
-            color: #52717c;
+        .click-info {
+
+            margin-top: 5px;
+
+            color: #66848b;
+
+            font-size: 15px;
+
+            font-weight: 500;
+
         }
+
+
+        /* =========================
+           클릭 숫자
+        ========================= */
+
+        .click-effect {
+
+            position: fixed;
+
+            pointer-events: none;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            color: #149bb0;
+
+            animation: floatUp 0.8s ease-out forwards;
+
+            z-index: 100;
+        }
+
+        @keyframes floatUp {
+
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) scale(1.2);
+            }
+
+        }
+
+
+        /* =========================
+           상점
+        ========================= */
 
         .shop {
-            background: white;
-            max-width: 500px;
-            margin: 35px auto 0;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+            margin-top: 40px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
         }
 
-        .shop h2 {
-            margin-top: 0;
+        .card {
+
+            background:
+                rgba(255,255,255,0.9);
+
+            border-radius: 20px;
+
+            padding: 20px;
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.07);
+
+            border:
+                1px solid rgba(0,0,0,0.04);
         }
 
-        .upgrade {
+        .card-icon {
+
+            font-size: 32px;
+
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+        }
+
+        .card-description {
+
+            margin-top: 5px;
+
+            min-height: 45px;
+
+            color: #6b858b;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+        }
+
+        .upgrade-button {
+
             width: 100%;
-            border: none;
-            border-radius: 12px;
-            padding: 18px;
-            margin-top: 10px;
 
-            background: #2c9faf;
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 14px 10px;
+
+            margin-top: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #25aabd,
+                    #168ca0
+                );
+
             color: white;
 
-            font-size: 18px;
-            font-weight: bold;
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 700;
 
             cursor: pointer;
+
+            transition: 0.15s;
+
         }
 
-        .upgrade:hover {
-            background: #258b9a;
+        .upgrade-button:hover {
+
+            transform: translateY(-2px);
+
+            filter: brightness(1.05);
+
         }
 
-        .upgrade:disabled {
-            background: #aab8bb;
+        .upgrade-button:active {
+
+            transform: scale(0.97);
+
+        }
+
+        .upgrade-button:disabled {
+
+            background: #b7c5c8;
+
             cursor: not-allowed;
+
+            transform: none;
+
         }
 
-        .message {
-            height: 30px;
-            margin-top: 15px;
-            font-weight: bold;
+
+        /* =========================
+           초기화
+        ========================= */
+
+        .reset {
+
+            display: block;
+
+            margin: 35px auto 0;
+
+            padding: 10px 18px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #84999d;
+
+            font-family: inherit;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
         }
+
+
+        /* =========================
+           모바일
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .container {
+
+                padding:
+                    20px 15px 50px;
+
+            }
+
+            .money {
+
+                font-size: 28px;
+
+            }
+
+            .water {
+
+                width: 240px;
+                height: 240px;
+
+                font-size: 80px;
+
+            }
+
+            .shop {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .card-description {
+
+                min-height: auto;
+
+            }
+
+        }
+
     </style>
 </head>
 
+
 <body>
 
-    <div class="top">
-        <div>💧 물 정화 타이쿤</div>
-        <div class="money" id="money">₩0</div>
+
+<header>
+
+    <div class="title">
+        💧 물 정화 타이쿤
     </div>
 
-    <div class="main">
+    <div
+        class="money"
+        id="money"
+    >
+        ₩0
+    </div>
 
-        <div class="stage" id="stage">
-            정화 단계 1 / 5
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- 상태 -->
+
+    <div class="status">
+
+        <div class="status-box">
+            🧪 정화 단계
+            <span id="stage">
+                1
+            </span>
         </div>
 
+        <div class="status-box">
+            📈 배수
+            <span id="multiplier">
+                ×1
+            </span>
+        </div>
+
+        <div class="status-box">
+            🤖 자동
+            <span id="autoLevel">
+                Lv.0
+            </span>
+        </div>
+
+    </div>
+
+
+
+    <!-- 물 -->
+
+    <div class="water-area">
+
         <div
-            class="water-box"
+            class="water"
             id="water"
-            onclick="collectWater()"
+            onclick="clickWater(event)"
         >
             🟤
         </div>
 
-        <div class="water-name" id="waterName">
+        <div
+            class="water-name"
+            id="waterName"
+        >
             더러운 물
         </div>
 
-        <div class="income" id="income">
+        <div
+            class="click-info"
+            id="clickInfo"
+        >
             클릭당 ₩1
-        </div>
-
-        <div class="message" id="message"></div>
-
-        <div class="shop">
-
-            <h2>🧪 정화 시설</h2>
-
-            <div id="upgradeInfo">
-                다음 정화 단계
-            </div>
-
-            <button
-                class="upgrade"
-                id="upgradeButton"
-                onclick="upgradeWater()"
-            >
-                정화 시설 업그레이드
-            </button>
-
         </div>
 
     </div>
 
+
+
+    <!-- 상점 -->
+
+    <div class="shop">
+
+
+        <!-- 정화 -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🧪
+            </div>
+
+            <div class="card-title">
+                물 정화
+            </div>
+
+            <div
+                class="card-description"
+                id="purifyDescription"
+            >
+                다음 단계로 물을 정화합니다.
+            </div>
+
+            <button
+                class="upgrade-button"
+                id="purifyButton"
+                onclick="purify()"
+            >
+                정화하기
+            </button>
+
+        </div>
+
+
+
+        <!-- 자동 클릭 -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🤖
+            </div>
+
+            <div class="card-title">
+                자동 클릭
+            </div>
+
+            <div
+                class="card-description"
+                id="autoDescription"
+            >
+                1초마다 돈을 벌어줍니다.
+            </div>
+
+            <button
+                class="upgrade-button"
+                id="autoButton"
+                onclick="upgradeAuto()"
+            >
+                구매
+            </button>
+
+        </div>
+
+
+
+        <!-- 배수 -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                📈
+            </div>
+
+            <div class="card-title">
+                수익 배수
+            </div>
+
+            <div
+                class="card-description"
+                id="multiplierDescription"
+            >
+                클릭 수익을 증가시킵니다.
+            </div>
+
+            <button
+                class="upgrade-button"
+                id="multiplierButton"
+                onclick="upgradeMultiplier()"
+            >
+                구매
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <button
+        class="reset"
+        onclick="resetGame()"
+    >
+        게임 초기화
+    </button>
+
+
+</div>
+
+
+
 <script>
 
-    // =========================
-    // 게임 데이터
-    // =========================
 
-    let money = Number(localStorage.getItem("money")) || 0;
+// ========================================
+// 게임 데이터
+// ========================================
 
-    let stage = Number(localStorage.getItem("stage")) || 1;
-
-    let clickPower = Number(localStorage.getItem("clickPower")) || 1;
-
-
-    // =========================
-    // 정화 단계
-    // =========================
-
-    const stages = [
-
-        {
-            name: "더러운 물",
-            emoji: "🟤",
-            color: "#654321",
-            power: 1,
-            price: 100
-        },
-
-        {
-            name: "탁한 물",
-            emoji: "🟫",
-            color: "#8b8068",
-            power: 5,
-            price: 500
-        },
-
-        {
-            name: "정화된 물",
-            emoji: "🟡",
-            color: "#b8c7a3",
-            power: 25,
-            price: 2500
-        },
-
-        {
-            name: "깨끗한 물",
-            emoji: "🔵",
-            color: "#4bb8d8",
-            power: 100,
-            price: 10000
-        },
-
-        {
-            name: "초순수",
-            emoji: "💎",
-            color: "#b9f4ff",
-            power: 500,
-            price: 50000
-        }
-
-    ];
+let money =
+    Number(
+        localStorage.getItem("money")
+    ) || 0;
 
 
-    // =========================
-    // 화면 업데이트
-    // =========================
-
-    function updateScreen() {
-
-        const current = stages[stage - 1];
-
-        document.getElementById("money").textContent =
-            "₩" + money.toLocaleString();
-
-        document.getElementById("stage").textContent =
-            "정화 단계 " + stage + " / " + stages.length;
-
-        document.getElementById("water").textContent =
-            current.emoji;
-
-        document.getElementById("water").style.background =
-            current.color;
-
-        document.getElementById("waterName").textContent =
-            current.name;
-
-        document.getElementById("income").textContent =
-            "클릭당 ₩" + clickPower.toLocaleString();
+let stage =
+    Number(
+        localStorage.getItem("stage")
+    ) || 1;
 
 
-        // 마지막 단계
-        if (stage >= stages.length) {
-
-            document.getElementById("upgradeInfo").textContent =
-                "최종 정화 단계입니다!";
-
-            document.getElementById("upgradeButton").textContent =
-                "최종 단계 달성!";
-
-            document.getElementById("upgradeButton").disabled =
-                true;
-
-            return;
-        }
+let autoLevel =
+    Number(
+        localStorage.getItem("autoLevel")
+    ) || 0;
 
 
-        const next = stages[stage];
+let multiplierLevel =
+    Number(
+        localStorage.getItem("multiplierLevel")
+    ) || 0;
 
-        document.getElementById("upgradeInfo").textContent =
-            "다음 단계: " +
-            next.name +
-            " · 필요 금액 ₩" +
-            next.price.toLocaleString();
 
-        document.getElementById("upgradeButton").textContent =
-            "🧪 정화하기 · ₩" +
-            next.price.toLocaleString();
 
-        document.getElementById("upgradeButton").disabled =
-            money < next.price;
+// ========================================
+// 정화 단계
+// ========================================
+
+const waterStages = [
+
+    {
+        name: "더러운 물",
+        emoji: "🟤",
+        color: "#654321",
+        price: 200
+    },
+
+    {
+        name: "탁한 물",
+        emoji: "🟫",
+        color: "#81745e",
+        price: 500
+    },
+
+    {
+        name: "정화된 물",
+        emoji: "🟡",
+        color: "#b8c58f",
+        price: 2500
+    },
+
+    {
+        name: "깨끗한 물",
+        emoji: "🔵",
+        color: "#4bbbd5",
+        price: 10000
+    },
+
+    {
+        name: "맑은 물",
+        emoji: "💧",
+        color: "#68d5ef",
+        price: 50000
+    },
+
+    {
+        name: "초순수",
+        emoji: "💎",
+        color: "#b9f5ff",
+        price: 250000
     }
 
-
-    // =========================
-    // 물 클릭
-    // =========================
-
-    function collectWater() {
-
-        money += clickPower;
-
-        saveGame();
-
-        updateScreen();
-
-    }
+];
 
 
-    // =========================
-    // 업그레이드
-    // =========================
 
-    function upgradeWater() {
+// ========================================
+// 배수 가격
+// ========================================
 
-        if (stage >= stages.length) {
-            return;
-        }
+const multiplierPrices = [
 
-        const next = stages[stage];
+    10,
+    50,
+    200,
+    1000,
+    5000,
+    25000,
+    100000
 
-        if (money < next.price) {
-
-            showMessage("💸 돈이 부족합니다!");
-
-            return;
-        }
+];
 
 
-        money -= next.price;
+// ========================================
+// 자동 클릭 가격
+// ========================================
 
-        stage++;
+const autoPrices = [
 
-        clickPower = stages[stage - 1].power;
+    100,
+    500,
+    2000,
+    10000,
+    50000,
+    250000
+
+];
 
 
-        saveGame();
 
-        updateScreen();
+// ========================================
+// 배수 계산
+// ========================================
 
-        showMessage(
-            "💧 " +
-            stages[stage - 1].name +
-            "으로 정화되었습니다!"
+function getMultiplier() {
+
+    return 1 +
+        multiplierLevel * 0.5;
+
+}
+
+
+
+// ========================================
+// 클릭 수익
+// ========================================
+
+function getClickPower() {
+
+    return getMultiplier();
+
+}
+
+
+
+// ========================================
+// 화면 업데이트
+// ========================================
+
+function updateScreen() {
+
+
+    // 돈
+
+    document.getElementById("money")
+        .textContent =
+        "₩" +
+        Math.floor(money)
+            .toLocaleString();
+
+
+
+    // 단계
+
+    document.getElementById("stage")
+        .textContent =
+        stage;
+
+
+
+    // 배수
+
+    document.getElementById("multiplier")
+        .textContent =
+        "×" +
+        getMultiplier();
+
+
+
+    // 자동 레벨
+
+    document.getElementById("autoLevel")
+        .textContent =
+        "Lv." +
+        autoLevel;
+
+
+
+    // 물
+
+    const current =
+        waterStages[stage - 1];
+
+
+    document.getElementById("water")
+        .textContent =
+        current.emoji;
+
+
+    document.getElementById("water")
+        .style.background =
+        `radial-gradient(
+            circle at 35% 30%,
+            ${lighten(current.color)},
+            ${current.color}
+        )`;
+
+
+    document.getElementById("waterName")
+        .textContent =
+        current.name;
+
+
+
+    // 클릭 수익
+
+    document.getElementById("clickInfo")
+        .textContent =
+        "클릭당 ₩" +
+        getClickPower()
+            .toLocaleString();
+
+
+
+    updatePurify();
+
+    updateAuto();
+
+    updateMultiplier();
+
+}
+
+
+
+// ========================================
+// 정화 업데이트
+// ========================================
+
+function updatePurify() {
+
+
+    const button =
+        document.getElementById(
+            "purifyButton"
         );
 
+
+    const description =
+        document.getElementById(
+            "purifyDescription"
+        );
+
+
+    if (stage >= waterStages.length) {
+
+        description.textContent =
+            "최고 단계에 도달했습니다!";
+
+        button.textContent =
+            "최종 단계 달성";
+
+        button.disabled = true;
+
+        return;
     }
 
 
-    // =========================
-    // 메시지
-    // =========================
-
-    function showMessage(text) {
-
-        const message =
-            document.getElementById("message");
-
-        message.textContent = text;
-
-        setTimeout(() => {
-
-            message.textContent = "";
-
-        }, 2000);
-
-    }
+    const next =
+        waterStages[stage];
 
 
-    // =========================
-    // 저장
-    // =========================
-
-    function saveGame() {
-
-        localStorage.setItem(
-            "money",
-            money
-        );
-
-        localStorage.setItem(
-            "stage",
-            stage
-        );
-
-        localStorage.setItem(
-            "clickPower",
-            clickPower
-        );
-
-    }
+    description.textContent =
+        "다음 단계: " +
+        next.name +
+        " · ₩" +
+        next.price.toLocaleString();
 
 
-    // =========================
-    // 시작
-    // =========================
+    button.textContent =
+        "🧪 정화 · ₩" +
+        next.price.toLocaleString();
+
+
+    button.disabled =
+        money < next.price;
+
+}
+
+
+
+// ========================================
+// 정화
+// ========================================
+
+function purify() {
+
+
+    if (stage >= waterStages.length)
+        return;
+
+
+    const next =
+        waterStages[stage];
+
+
+    if (money < next.price)
+        return;
+
+
+    money -= next.price;
+
+    stage++;
+
+
+    saveGame();
 
     updateScreen();
+
+}
+
+
+
+// ========================================
+// 자동 클릭 업데이트
+// ========================================
+
+function updateAuto() {
+
+
+    const button =
+        document.getElementById(
+            "autoButton"
+        );
+
+
+    const description =
+        document.getElementById(
+            "autoDescription"
+        );
+
+
+    if (
+        autoLevel >= autoPrices.length
+    ) {
+
+        description.textContent =
+            "자동 클릭 최고 레벨!";
+
+        button.textContent =
+            "MAX";
+
+        button.disabled = true;
+
+        return;
+
+    }
+
+
+    const price =
+        autoPrices[autoLevel];
+
+
+    const income =
+        autoLevel === 0
+        ? 1
+        : autoLevel * 5;
+
+
+    description.textContent =
+        "현재 Lv." +
+        autoLevel +
+        " · 다음 레벨은 초당 +" +
+        income +
+        "원";
+
+
+    button.textContent =
+        "🤖 Lv." +
+        (autoLevel + 1) +
+        " · ₩" +
+        price.toLocaleString();
+
+
+    button.disabled =
+        money < price;
+
+}
+
+
+
+// ========================================
+// 자동 클릭 업그레이드
+// ========================================
+
+function upgradeAuto() {
+
+
+    if (
+        autoLevel >= autoPrices.length
+    )
+        return;
+
+
+    const price =
+        autoPrices[autoLevel];
+
+
+    if (money < price)
+        return;
+
+
+    money -= price;
+
+    autoLevel++;
+
+
+    saveGame();
+
+    updateScreen();
+
+}
+
+
+
+// ========================================
+// 배수 업데이트
+// ========================================
+
+function updateMultiplier() {
+
+
+    const button =
+        document.getElementById(
+            "multiplierButton"
+        );
+
+
+    const description =
+        document.getElementById(
+            "multiplierDescription"
+        );
+
+
+    if (
+        multiplierLevel >=
+        multiplierPrices.length
+    ) {
+
+        description.textContent =
+            "최대 배수에 도달했습니다!";
+
+        button.textContent =
+            "MAX";
+
+        button.disabled = true;
+
+        return;
+
+    }
+
+
+    const price =
+        multiplierPrices[
+            multiplierLevel
+        ];
+
+
+    const nextMultiplier =
+        1 +
+        (multiplierLevel + 1)
+        * 0.5;
+
+
+    description.textContent =
+        "현재 ×" +
+        getMultiplier() +
+        " → 다음 ×" +
+        nextMultiplier;
+
+
+    button.textContent =
+        "📈 ×" +
+        nextMultiplier +
+        " · ₩" +
+        price.toLocaleString();
+
+
+    button.disabled =
+        money < price;
+
+}
+
+
+
+// ========================================
+// 배수 업그레이드
+// ========================================
+
+function upgradeMultiplier() {
+
+
+    if (
+        multiplierLevel >=
+        multiplierPrices.length
+    )
+        return;
+
+
+    const price =
+        multiplierPrices[
+            multiplierLevel
+        ];
+
+
+    if (money < price)
+        return;
+
+
+    money -= price;
+
+    multiplierLevel++;
+
+
+    saveGame();
+
+    updateScreen();
+
+}
+
+
+
+// ========================================
+// 물 클릭
+// ========================================
+
+function clickWater(event) {
+
+
+    const amount =
+        getClickPower();
+
+
+    money += amount;
+
+
+    createClickEffect(
+        event.clientX,
+        event.clientY,
+        amount
+    );
+
+
+    saveGame();
+
+    updateScreen();
+
+}
+
+
+
+// ========================================
+// 클릭 애니메이션
+// ========================================
+
+function createClickEffect(
+    x,
+    y,
+    amount
+) {
+
+
+    const effect =
+        document.createElement(
+            "div"
+        );
+
+
+    effect.className =
+        "click-effect";
+
+
+    effect.textContent =
+        "+₩" +
+        amount.toLocaleString();
+
+
+    effect.style.left =
+        x + "px";
+
+
+    effect.style.top =
+        y + "px";
+
+
+    document.body.appendChild(
+        effect
+    );
+
+
+    setTimeout(() => {
+
+        effect.remove();
+
+    }, 800);
+
+}
+
+
+
+// ========================================
+// 자동 수익
+// ========================================
+
+setInterval(() => {
+
+
+    if (autoLevel <= 0)
+        return;
+
+
+    // 자동 클릭 수익
+
+    const income =
+        autoLevel *
+        getMultiplier();
+
+
+    money += income;
+
+
+    saveGame();
+
+    updateScreen();
+
+
+}, 1000);
+
+
+
+// ========================================
+// 저장
+// ========================================
+
+function saveGame() {
+
+
+    localStorage.setItem(
+        "money",
+        money
+    );
+
+
+    localStorage.setItem(
+        "stage",
+        stage
+    );
+
+
+    localStorage.setItem(
+        "autoLevel",
+        autoLevel
+    );
+
+
+    localStorage.setItem(
+        "multiplierLevel",
+        multiplierLevel
+    );
+
+}
+
+
+
+// ========================================
+// 색상 밝게
+// ========================================
+
+function lighten(hex) {
+
+    return hex + "cc";
+
+}
+
+
+
+// ========================================
+// 초기화
+// ========================================
+
+function resetGame() {
+
+
+    const answer =
+        confirm(
+            "정말 게임을 초기화할까요?"
+        );
+
+
+    if (!answer)
+        return;
+
+
+    money = 0;
+
+    stage = 1;
+
+    autoLevel = 0;
+
+    multiplierLevel = 0;
+
+
+    saveGame();
+
+    updateScreen();
+
+}
+
+
+
+// ========================================
+// 게임 시작
+// ========================================
+
+updateScreen();
 
 </script>
 
